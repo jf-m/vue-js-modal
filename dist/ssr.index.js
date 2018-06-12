@@ -163,7 +163,7 @@
     }, function(module, exports, __webpack_require__) {
         __webpack_require__(21);
         var Component = __webpack_require__(0)(__webpack_require__(8), __webpack_require__(18), null, null);
-        Component.options.__file = "/Users/yev.vlasenko2/Projects/vue/vue-js-modal/src/Dialog.vue", 
+        Component.options.__file = "/Users/jfmeinesz/Work/BR/vue-js-modal/src/Dialog.vue", 
         Component.esModule && Object.keys(Component.esModule).some(function(key) {
             return "default" !== key && "__esModule" !== key;
         }) && console.error("named exports are not supported in *.vue files."), Component.options.functional && console.error("[vue-loader] Dialog.vue: functional components are not supported with templates, they should use render functions."), 
@@ -171,14 +171,14 @@
     }, function(module, exports, __webpack_require__) {
         __webpack_require__(22);
         var Component = __webpack_require__(0)(__webpack_require__(9), __webpack_require__(19), null, null);
-        Component.options.__file = "/Users/yev.vlasenko2/Projects/vue/vue-js-modal/src/Modal.vue", 
+        Component.options.__file = "/Users/jfmeinesz/Work/BR/vue-js-modal/src/Modal.vue", 
         Component.esModule && Object.keys(Component.esModule).some(function(key) {
             return "default" !== key && "__esModule" !== key;
         }) && console.error("named exports are not supported in *.vue files."), Component.options.functional && console.error("[vue-loader] Modal.vue: functional components are not supported with templates, they should use render functions."), 
         module.exports = Component.exports;
     }, function(module, exports, __webpack_require__) {
         var Component = __webpack_require__(0)(__webpack_require__(10), __webpack_require__(17), null, null);
-        Component.options.__file = "/Users/yev.vlasenko2/Projects/vue/vue-js-modal/src/ModalsContainer.vue", 
+        Component.options.__file = "/Users/jfmeinesz/Work/BR/vue-js-modal/src/ModalsContainer.vue", 
         Component.esModule && Object.keys(Component.esModule).some(function(key) {
             return "default" !== key && "__esModule" !== key;
         }) && console.error("named exports are not supported in *.vue files."), Component.options.functional && console.error("[vue-loader] ModalsContainer.vue: functional components are not supported with templates, they should use render functions."), 
@@ -286,6 +286,14 @@
                 reset: {
                     type: Boolean,
                     default: !1
+                },
+                absolutePositioning: {
+                    type: Boolean,
+                    default: !1
+                },
+                force3d: {
+                    type: Boolean,
+                    default: !0
                 },
                 transition: {
                     type: String
@@ -449,12 +457,12 @@
                     return [ "v--modal-box", this.classes ];
                 },
                 modalStyle: function() {
-                    return {
-                        top: this.position.top + "px",
-                        left: this.position.left + "px",
+                    var style = {
                         width: this.trueModalWidth + "px",
                         height: this.isAutoHeight ? "auto" : this.trueModalHeight + "px"
                     };
+                    return this.absolutePositioning ? (style.top = this.position.top + "px", style.left = this.position.left + "px") : this.force3d ? style.transform = "translate3d(" + Math.round(this.position.left) + "px, " + Math.round(this.position.top) + "px, 0px)" : style.transform = "translate(" + Math.round(this.position.left) + "px, " + Math.round(this.position.top) + "px)", 
+                    style;
                 }
             },
             methods: {
@@ -733,7 +741,7 @@
     }, function(module, exports, __webpack_require__) {
         __webpack_require__(23);
         var Component = __webpack_require__(0)(__webpack_require__(11), __webpack_require__(20), null, null);
-        Component.options.__file = "/Users/yev.vlasenko2/Projects/vue/vue-js-modal/src/Resizer.vue", 
+        Component.options.__file = "/Users/jfmeinesz/Work/BR/vue-js-modal/src/Resizer.vue", 
         Component.esModule && Object.keys(Component.esModule).some(function(key) {
             return "default" !== key && "__esModule" !== key;
         }) && console.error("named exports are not supported in *.vue files."), Component.options.functional && console.error("[vue-loader] Resizer.vue: functional components are not supported with templates, they should use render functions."), 
@@ -847,10 +855,10 @@
                     class: _vm.backgroundClickClass,
                     on: {
                         mousedown: function($event) {
-                            $event.stopPropagation(), _vm.onBackgroundClick($event);
+                            return $event.stopPropagation(), _vm.onBackgroundClick($event);
                         },
                         touchstart: function($event) {
-                            $event.stopPropagation(), _vm.onBackgroundClick($event);
+                            return $event.stopPropagation(), _vm.onBackgroundClick($event);
                         }
                     }
                 }, [ _c("div", {

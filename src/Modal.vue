@@ -580,10 +580,10 @@ export default {
           let { clientX, clientY } = getPosition(event)
 
           document.addEventListener('mousemove', handleDraggableMousemove)
-          document.addEventListener('touchmove', handleDraggableMousemove)
+          document.addEventListener('touchmove', handleDraggableMousemove, {passive: true})
 
           document.addEventListener('mouseup', handleDraggableMouseup)
-          document.addEventListener('touchend', handleDraggableMouseup)
+          document.addEventListener('touchend', handleDraggableMouseup, {passive: true})
 
           startX = clientX
           startY = clientY
@@ -611,8 +611,8 @@ export default {
           event.preventDefault()
         }
 
-        dragger.addEventListener('mousedown', handleDraggableMousedown)
-        dragger.addEventListener('touchstart', handleDraggableMousedown)
+        dragger.addEventListener('mousedown', handleDraggableMousedown, {passive: true})
+        dragger.addEventListener('touchstart', handleDraggableMousedown, {passive: true})
       }
     },
 

@@ -519,7 +519,7 @@ export default {
         ? '.v--modal-box'
         : this.draggable
 
-      return selector
+      return (selector && this.$refs.overlay)
         ? this.$refs.overlay.querySelector(selector)
         : null
     },
@@ -637,7 +637,7 @@ export default {
      * the callback (registered in beforeMount) will be called.
      */
     connectObserver () {
-      if (this.mutationObserver) {
+      if (this.mutationObserver && this.$refs.overlay) {
         this.mutationObserver.observe(this.$refs.overlay, {
           childList: true,
           attributes: true,

@@ -96,6 +96,10 @@ export default {
       type: Boolean,
       default: true
     },
+    resizeEventName: {
+      type: String,
+      default: 'resize'
+    },
     classes: {
       type: [String, Array],
       default: 'v--modal'
@@ -191,7 +195,7 @@ export default {
   beforeMount () {
     Modal.event.$on('toggle', this.handleToggleEvent)
 
-    window.addEventListener('resize', this.handleWindowResize)
+    window.addEventListener(this.resizeEventName, this.handleWindowResize)
     this.handleWindowResize()
     /**
      * Making sure that autoHeight is enabled when using "scrollable"
@@ -239,7 +243,7 @@ export default {
    */
   beforeDestroy () {
     Modal.event.$off('toggle', this.handleToggleEvent)
-    window.removeEventListener('resize', this.handleWindowResize)
+    window.removeEventListener(this.resizeEventName, this.handleWindowResize)
 
     if (this.clickToClose) {
       window.removeEventListener('keyup', this.handleEscapeKeyUp)
